@@ -38,6 +38,7 @@ declare class Dolph {
      * property adds middlewares to the `express application`
      */
     initExternalMiddleWares(middlewares: Array<any>): void;
+    exitHandler(): void;
     #private;
 }
 declare namespace Dolph {
