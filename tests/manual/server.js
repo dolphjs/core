@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
 /* eslint-disable max-classes-per-file */
-const io = require('socket.io');
+// const io = require('socket.io');
 const cors = require('cors');
+const { default: mongoose } = require('mongoose');
 const { catchAsync, Router, AppRes, httpStatus, mediaParser } = require('../../index');
 const Dolph = require('../../index');
 const User = require('./model');
@@ -72,31 +73,41 @@ const routes = [new TestRoute()];
 const middlewares = [cors({ origin: '*', credentials: true })];
 // It is recommended to attach other services using prototyping
 //  in order not to crowd the constructor initiaizer
-const dolph = new Dolph(routes, '1313', 'development', mongoConfig, middlewares);
-const server = dolph.listen();
+const dolph = new Dolph(routes, '1313', 'development', { url: mongoConfig.url, options: mongoConfig.options }, middlewares);
+// const server = dolph.listen();
+dolph.listen();
+// mongoose
+//   .connect(mongoConfig.url, mongoConfig.options)
+//   // eslint-disable-next-line no-unused-vars
+//   .then((result) => {
+//     console.info('MonogDB connected');
+//   })
+//   .catch((err) => {
+//     console.error(err);
+//   });
 
-const socket = io(server, {
-  cors: {
-    origin: '*',
-    credentials: true,
-  },
-});
+// const socket = io(server, {
+//   cors: {
+//     origin: '*',
+//     credentials: true,
+//   },
+// });
 
-global.onlineUsers = new Map();
+// global.onlineUsers = new Map();
 
-// eslint-disable-next-line no-shadow
-socket.on('connection', (socket) => {
-  console.log(socket);
-  socket.on('add-user', (userId) => {
-    // eslint-disable-next-line no-undef
-    onlineUsers.set(userId, socket.id);
+// // eslint-disable-next-line no-shadow
+// socket.on('connection', (socket) => {
+//   console.log(socket);
+//   socket.on('add-user', (userId) => {
+//     // eslint-disable-next-line no-undef
+//     onlineUsers.set(userId, socket.id);
 
-    // eslint-disable-next-line no-undef
-    if (onlineUsers.get(userId)) {
-      socket.emit('active', userId);
-    }
-  });
-});
+//     // eslint-disable-next-line no-undef
+//     if (onlineUsers.get(userId)) {
+//       socket.emit('active', userId);
+//     }
+//   });
+// });
 
 // // In order to make use of another datbase you call it directly
 // sequelize
