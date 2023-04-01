@@ -6,16 +6,13 @@ declare class Dolph {
      * @param {Array<{path?: string; router:  import("express").Router}>} routes
      * @param {string|number} port
      * @param {string|number} env
-     * @param {{url:string, options:Object}} mongodbConfig
+     * @param {{url:string, options:Object}} mongodbConfigz
      * @param {Array<any>} externalMiddlewares
      */
     constructor(routes: Array<{
         path?: string;
         router: import("express").Router;
-    }>, port: string | number, env: string | number, mongodbConfig: {
-        url: string;
-        options: any;
-    }, externalMiddlewares: Array<any>);
+    }>, port: string | number, env: string | number, mongodbConfig: any, externalMiddlewares: Array<any>);
     app: import("express-serve-static-core").Express;
     env: string | number;
     port: string | number;
@@ -25,6 +22,10 @@ declare class Dolph {
      * can be used for websocket connections
      */
     listen(): Server<typeof IncomingMessage, typeof ServerResponse>;
+    /**
+     * closes active mongoDB connection
+     */
+    closeMongoConnection(): void;
     /**
      *
      * @returns {express.Express}
