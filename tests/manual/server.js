@@ -2,7 +2,7 @@
 /* eslint-disable max-classes-per-file */
 // const io = require('socket.io');
 const cors = require('cors');
-const { default: mongoose } = require('mongoose');
+// const { default: mongoose } = require('mongoose');
 const { catchAsync, Router, AppRes, httpStatus, mediaParser } = require('../../index');
 const Dolph = require('../../index');
 const User = require('./model');
