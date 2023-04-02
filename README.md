@@ -56,9 +56,57 @@ Here's an example of how you can use it:
     	}
     }
 
-    const dolph = new Dolph([new TestRoute()], '9999', { url: null }, []);
+    const dolph = new Dolph([new TestRoute()], '9999', "development", { url: null }, []);
 
     dolph.listen();
+```
+
+The `Dolph` class takes 5 arguments when instantiated: `routes`, `port` ,`node_env`, `mongodb connection params` and `middleware`
+
+- `routes` is an array of the applications routes
+- `port` is the port you want your server to run on
+- `node_env` is your node environment which is set to "development" by default when you run `node run dev` . This env can be imported thus:
+
+```javascript
+require('dotenv').config({});
+const nodeEnv = process.env.NODE_ENV;
+```
+
+- `mongodb connection params` is only used if your making use of a mongodb database. It is an object with two fields: `url` and `options` which are the mongodb url and mongodb options respectively. If your making use of another databse or don't want to connect it through mongodb, you can connect it outside the function and also set the `url` param to `false`.
+
+````javascript
+const mongoConfig = {
+  	url: 'mongodb://127.0.0.1:27017/dolphjs',
+  	options: {
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+		autoIndex: true,
+		dbName: 'dolphjs',
+	},
+};
+new Dolph(routes, '1313', 'development', { url: mongoConfig.url, options: mongoConfig.options }, []);
+``` or
+```javascript
+const mongoConfig = {
+  	url: 'mongodb://127.0.0.1:27017/dolphjs',
+  	options: {
+    	useNewUrlParser: true,
+    	useUnifiedTopology: true,
+    	autoIndex: true,
+    	dbName: 'dolphjs',
+  	},
+};
+new Dolph(routes, '1313', 'development', { url: null }, []);
+mongoose.connect(mongoConfig.url, mongoConfig.options).then().catch();
+````
+
+- `middlewares` is an array of middlewares you want to pass to the `express.app` function embedded inside of dolphjs' engine.
+
+Here's an example:
+
+```javascript
+const cors = require('cors');
+new Dolph(routes, '1313', 'development', { url: null }, [cors({ origin: '*' })]);
 ```
 
 ## CatchAsync
@@ -104,21 +152,25 @@ The `mediaParser` function uses the `multer` package under the hood to parse med
 Here's an example of how you can use it:
 
 ```javascript
-	const { Router, mediaParser } = require("@dolphjs/core");
-	const TestController = require("../controllers/test.controller");
+const { Router, mediaParser } = require('@dolphjs/core');
+const TestController = require('../controllers/test.controller');
 
-	class TestRoute {
-    	path = '/test';
-    	router = Router();
-    	controller = new TestController();
-    	constructor() {
-    		this.initializeRoutes();
-    	}
-    	initializeRoutes() {
-    		this.router.get(`${this.path}`, this.controller.getMsg);
-    		this.router.post(`${this.path}`, mediaParser({ type: 'single', storage: {}, fieldname: 'upload' }),,this.controller.sendMsg);
-    	}
-    }
+class TestRoute {
+  path = '/test';
+  router = Router();
+  controller = new TestController();
+  constructor() {
+    this.initializeRoutes();
+  }
+  initializeRoutes() {
+    this.router.get(`${this.path}`, this.controller.getMsg);
+    this.router.post(
+      `${this.path}`,
+      mediaParser({ type: 'single', storage: {}, fieldname: 'upload' }),
+      this.controller.sendMsg
+    );
+  }
+}
 ```
 
 It accepts five arguments: `type`, `storage`, `fieldname`, `limit`
@@ -128,12 +180,18 @@ It accepts five arguments: `type`, `storage`, `fieldname`, `limit`
 * the `single` type is used for uploading a single media file
 * the `array` type is used to upload an array of files with a common fieldname
 
-- the storage parameter defaults to an empty object but takes the same fields you would pass to the `diskStorage` function in multer [https://github.com/multer] which means files wouldn't be stored in the filesystem.
+- the storage parameter defaults to an empty object but takes the same fields you would pass to the `diskStorage` function in multer [https://github.com/expressjs/multer] which means files wouldn't be stored in the filesystem.
   Leaving it empty is ideal when you want to get the file path and store in a cloud service like `AWS` or ` Cloudinary`.
 
 - the fieldname parameter specifies the name that would be used to identify the file(s) from the frontend or API tetsing tool.
 
 - the limit parameter is only used when the `type` paramter is set to `array`. This tells the function the max amount of files it's allowed to parse.
+
+## Note
+
+Dolphjs makes use of the following middleware packages so you don't need to install them again:
+
+- helmet
 
 ## License
 
