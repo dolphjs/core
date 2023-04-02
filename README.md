@@ -74,31 +74,34 @@ const nodeEnv = process.env.NODE_ENV;
 
 - `mongodb connection params` is only used if your making use of a mongodb database. It is an object with two fields: `url` and `options` which are the mongodb url and mongodb options respectively. If your making use of another databse or don't want to connect it through mongodb, you can connect it outside the function and also set the `url` param to `false`.
 
-````javascript
-const mongoConfig = {
-  	url: 'mongodb://127.0.0.1:27017/dolphjs',
-  	options: {
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
-		autoIndex: true,
-		dbName: 'dolphjs',
-	},
-};
-new Dolph(routes, '1313', 'development', { url: mongoConfig.url, options: mongoConfig.options }, []);
-``` or
 ```javascript
 const mongoConfig = {
-  	url: 'mongodb://127.0.0.1:27017/dolphjs',
-  	options: {
-    	useNewUrlParser: true,
-    	useUnifiedTopology: true,
-    	autoIndex: true,
-    	dbName: 'dolphjs',
-  	},
+  url: 'mongodb://127.0.0.1:27017/dolphjs',
+  options: {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    autoIndex: true,
+    dbName: 'dolphjs',
+  },
+};
+new Dolph(routes, '1313', 'development', { url: mongoConfig.url, options: mongoConfig.options }, []);
+```
+
+or
+
+```javascript
+const mongoConfig = {
+  url: 'mongodb://127.0.0.1:27017/dolphjs',
+  options: {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    autoIndex: true,
+    dbName: 'dolphjs',
+  },
 };
 new Dolph(routes, '1313', 'development', { url: null }, []);
 mongoose.connect(mongoConfig.url, mongoConfig.options).then().catch();
-````
+```
 
 - `middlewares` is an array of middlewares you want to pass to the `express.app` function embedded inside of dolphjs' engine.
 
