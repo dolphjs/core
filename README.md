@@ -196,7 +196,7 @@ Dolphjs makes use of the following middleware packages so you don't need to inst
 
 - helmet
 
-If you need a better guide on how to setup a dolphjs application is best you view an example application built with dolphjs [https://github.com/dolphjs/examples]
+If you need a better guide on how to setup a dolphjs application is best you view an example application built with dolphjs [https://github.com/dolphjs/example]
 
 ## License
 
