@@ -1,6 +1,6 @@
 {
   "name": "@dolphjs/core",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "dolph is a light-weight, fast, express sugar-coat library for making software development faster ",
   "type": "commonjs",
   "maintainers": [
@@ -25,7 +25,8 @@
     "dev": "cross-env NODE_ENV=development nodemon tests/manual/server.js",
     "start": "cross-env NODE_ENV=development node tests/manual/server.js",
     "push": "npm publish",
-    "build": "tsc"
+    "build": "tsc",
+    "benchmark": "node benchmarks/benchmark/middleware.js"
   },
   "publishConfig": {
     "access": "public"
@@ -49,6 +50,7 @@
   "author": "Utibeabasi ekong <kamounation@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "benchmark": "^2.1.4",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.3",
@@ -62,9 +64,11 @@
     "winston": "^3.8.2"
   },
   "devDependencies": {
+    "@types/benchmark": "^2.1.2",
     "@types/express": "^4.17.15",
     "@types/jest": "^29.5.0",
     "@types/multer": "^1.4.7",
+    "cli-table3": "^0.6.3",
     "eslint": "^8.30.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.5.0",
