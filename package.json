@@ -11,7 +11,7 @@
     "Andry Rasolofomanana <https://github.com/andryrasolofomanana>",
     "Christopher Egbaaibon <https://github.com/chrisegbaaaibon>"
   ],
-  "repository": "https://github.com/kamounation/owl",
+  "repository": "https://github.com/dolphjs/core",
   "engines": {
     "node": ">=14.0.0"
   },

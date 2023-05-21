@@ -12,7 +12,7 @@ To install the package, run:
 
 `npm install @dolphjs/core`
 
-or `npm install dolph-cli -g` to make use of the CLI tool. [https://github.com/dolphjs/cli]
+or `npm install dolph-cli -g` to make use of the CLI tool (recommended). [https://github.com/dolphjs/cli]
 
 ## Usage
 
@@ -56,7 +56,7 @@ Here's an example of how you can use it:
      }
     }
 
-    const dolph = new Dolph([new TestRoute()], '9999', "development", { url: null }, []);
+    const dolph = new Dolph([new TestRoute()], '1919', "development", { url: null }, []);
 
     dolph.listen();
 ```
@@ -71,7 +71,9 @@ router.get('/', (req, res) => {
   res.send('Heyoooo!!');
 });
 
-const dolph = new Dolph([{ path: '/', router }], '9999', 'development', null, []);
+const routes = [{ path: '/api/v1', router }];
+
+const dolph = new Dolph(routes, '1919', 'development', null, []);
 dolph.listen();
 ```
 
@@ -170,7 +172,7 @@ Here's an example of how you can use it:
 
 ```javascript
 const { Router, mediaParser } = require('@dolphjs/core');
-const TestController = require('../controllers/test.controller');
+const TestController = require('@/controllers/test.controller');
 
 class TestRoute {
   path = '/test';
@@ -190,6 +192,20 @@ class TestRoute {
 }
 ```
 
+alternatively,
+
+```javascript
+const { Router, mediaParser } = require('@dolphjs/core');
+const TestController = require('@/controllers/test.controller');
+
+const router = Router();
+
+router.get(`${this.path}`, new TestController().getMsg);
+router.post(`${this.path}`, mediaParser({ type: 'single', storage: {}, fieldname: 'upload' }), new TestController().sendMsg);
+
+const routes = [{ path: '/', router }];
+```
+
 It accepts five arguments: `type`, `storage`, `fieldname`, `limit`
 
 - the current version of dolphjs supports two types => `single` && `array`
@@ -204,11 +220,44 @@ It accepts five arguments: `type`, `storage`, `fieldname`, `limit`
 
 - the limit parameter is only used when the `type` paramter is set to `array`. This tells the function the max amount of files it's allowed to parse.
 
+## Usage With Websockets
+
+Incase you wonder how you'll attach a websocket server to the dolph engine then this would be of help:
+using socket.io -
+
+```javascript
+const io = require('socket.io');
+
+const dolph = new Dolph(routes, '1313', 'development', { url: mongoConfig.url, options: mongoConfig.options }, middlewares);
+const server = dolph.listen();
+
+const socket = io(server, {
+  cors: {
+    origin: '*',
+    credentials: true,
+  },
+});
+
+global.onlineUsers = new Map();
+
+socket.on('connection', (socket) => {
+  socket.on('add-user', (userId) => {
+    onlineUsers.set(userId, socket.id);
+
+    if (onlineUsers.get(userId)) {
+      socket.emit('active', userId);
+    }
+  });
+});
+```
+
 ## Note
 
 Dolphjs makes use of the following middleware packages so you don't need to install them again:
 
 - helmet
+- httpStatus
+- express
 
 If you need a better guide on how to setup a dolphjs application is best you view an example application built with dolphjs [https://github.com/dolphjs/example]
 
@@ -216,7 +265,7 @@ If you need a better guide on how to setup a dolphjs application is best you vie
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
-### Please note that this package is still in production and more versions will be released in the future. Stay tuned for updates and new features
+### Please note that this package is still in it's beta stage and a lot of features would be added in later versions will be released in the future. Stay tuned for updates and new features
 
 ### BENCHMARK
 
