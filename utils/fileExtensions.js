@@ -15,6 +15,12 @@ const defaultAllowedFileExtensions = [
   '.mkv',
   '.mov',
   '.flv',
+  '.html',
+  '.xml',
+  '.xhtml',
+  '.avi',
+  '.wav',
+  '.bmi',
 ];
 
 module.exports = defaultAllowedFileExtensions;
