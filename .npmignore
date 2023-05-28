@@ -9,5 +9,6 @@ benchmark.md
 .env.example
 .editorConfig
 .eslintrc.json
+.github
 
 *.tsbuildinfo
