@@ -12,7 +12,7 @@ To install the package, run:
 
 `npm install @dolphjs/core`
 
-or `npm install dolph-cli -g` to make use of the CLI tool (recommended). [https://github.com/dolphjs/cli]
+or `npm install @dolphjs/cli -g` to make use of the CLI tool (recommended). [https://github.com/dolphjs/cli]
 
 ## Usage
 
@@ -88,7 +88,7 @@ require('dotenv').config({});
 const nodeEnv = process.env.NODE_ENV;
 ```
 
-- `mongodb connection params` is only used if your making use of a mongodb database. It is an object with two fields: `url` and `options` which are the mongodb url and mongodb options respectively. If your making use of another databse or don't want to connect it through mongodb, you can connect it outside the function and also set the `url` param to `false`.
+- `mongodb connection params` is only used if your making use of a mongodb database. It is an object with two fields: `url` and `options` which are the mongodb url and mongodb options respectively. If your making use of another databse or don't want to connect it through mongodb, you can connect it outside the function and also set the `url` param to `false`:
 
 ```javascript
 const mongoConfig = {
@@ -160,8 +160,8 @@ It is just an export of the original http-status package, here [https://github.c
 Here's an example of how you can use it:
 
 ```javascript
-const { AppRes } = require('@dolphjs/core');
-new AppRes(Dolph.httpStatus.BAD_REQUEST, 'error message');
+const { AppRes, httpStatus } = require('@dolphjs/core');
+new AppRes(httpStatus.BAD_REQUEST, 'error message');
 ```
 
 ## MediaParser
@@ -206,9 +206,38 @@ router.post(`${this.path}`, mediaParser({ type: 'single', storage: {}, fieldname
 const routes = [{ path: '/', router }];
 ```
 
-It accepts five arguments: `type`, `storage`, `fieldname`, `limit`
+It accepts five arguments: `allowedExtensions` `type`, `storage`, `fieldname`, `limit`
 
-- the current version of dolphjs supports two types => `single` && `array`
+- the `allowedExtensions` param takes an array of file extensions the application should allow. If left empty as in the example above, it uses the default which includes:
+
+```javascript
+[
+  '.jpeg',
+  '.png',
+  '.jpg',
+  '.xlsx',
+  '.mp3',
+  '.mp4',
+  '.doc',
+  '.docx',
+  '.pdf',
+  '.txt',
+  '.webm',
+  '.wmv',
+  '.mpeg',
+  '.mkv',
+  '.mov',
+  '.flv',
+  '.html',
+  '.xml',
+  '.xhtml',
+  '.avi',
+  '.wav',
+  '.bmi',
+];
+```
+
+- the current version of dolphjs supports two types : `single` && `array`
 
 - the `single` type is used for uploading a single media file
 - the `array` type is used to upload an array of files with a common fieldname
@@ -218,7 +247,19 @@ It accepts five arguments: `type`, `storage`, `fieldname`, `limit`
 
 - the fieldname parameter specifies the name that would be used to identify the file(s) from the frontend or API tetsing tool.
 
-- the limit parameter is only used when the `type` paramter is set to `array`. This tells the function the max amount of files it's allowed to parse.
+- the limit parameter is only used when the `type` paramter is set to `array`. This sets the max amount of files it's allowed to parse.
+
+## Pick
+
+The `pick` function allows for getting fields and values and setting to an object:
+
+```javascript
+const filter = pick(req.query, ['limit', 'page']);
+// console.log(filter)
+// filter = {limit: 20, page: 1}
+```
+
+the above code takes the limit and page properties of `req.query` express offers and adds them to a new object `filter`.
 
 ## Usage With Websockets
 
@@ -259,7 +300,7 @@ Dolphjs makes use of the following middleware packages so you don't need to inst
 - httpStatus
 - express
 
-If you need a better guide on how to setup a dolphjs application is best you view an example application built with dolphjs [https://github.com/dolphjs/example]
+If you need a better guide on how to setup a dolphjs application it's best you view an example application built with dolphjs [https://github.com/dolphjs/example] or better still, use the CLI application which sets up your dolphjs application just how you want it.
 
 ## License
 
@@ -271,12 +312,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 DolphJS is very performant, to run benchmarks is very simple:
 
-```bash
+```shell
   yarn benchmark
 ```
 
 or
 
-```bash
+```shell
   npm run benchmark
 ```
