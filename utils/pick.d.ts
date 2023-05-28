@@ -1,6 +1,6 @@
 /**
  * Create an object composed of the picked object properties
- * [Example]: `const filter = pick('req.query', ['limit', 'page'])`; would get the limit and page properties from the query object.
+ * [Example]: `const filter = pick(req.query, ['limit', 'page'])`; would get the limit and page properties from the query object.
  * @param {Object} object
  * @param {string[]} keys
  * @returns {Object}

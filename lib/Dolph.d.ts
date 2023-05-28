@@ -18,8 +18,7 @@ declare class Dolph {
     port: string | number;
     /**
      * @returns {Server<typeof IncomingMessage, typeof ServerResponse>}
-     * function returns the dolphjs server which
-     * can be used for websocket connections
+     * function returns the dolphjs server which exposes the `express()` funcion
      */
     listen(): Server<typeof IncomingMessage, typeof ServerResponse>;
     /**
