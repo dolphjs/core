@@ -16,7 +16,7 @@
     "node": ">=14.0.0"
   },
   "sponsor": {
-    "url": "https:questgig.com"
+    "url": "https://questgig.com"
   },
   "scripts": {
     "test": "jest -i --colors --verbose --detectOpenHandles",
