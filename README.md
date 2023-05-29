@@ -6,6 +6,10 @@ DolphJs makes it possible for junior developers to write code in an environment 
 
 With dolphJs, code is minimized as many repetitive features are taken account of and put into the engine which is then exposed to the developer.
 
+## Prerequisites
+
+1.Git 2. Node: any 14.x version starting with v14.0.0 or greater 3. Package Manager [Yarn, Npm or Pnpm](recommended`yarn`)(<https://yarnpkg.com/lang/en/docs/install/>) 4. A fork of the repo (for any contributions)
+
 ## Installation
 
 To install the package, run:
@@ -305,6 +309,28 @@ If you need a better guide on how to setup a dolphjs application it's best you v
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+
+## Contributing
+
+### Create a branch
+
+1. `git checkout main` from any folder in your local `dolphjs` repository
+2. `git pull origin main` to ensure you have the latest main code
+3. `git checkout -b the-name-of-your-branch` (replacing `the-name-of-your-branch` with a suitable name) to create a branch
+
+### Make the change
+
+1. Save the files and test
+2. The application should be able to receive and send requests and response respectfully
+3. Run `yarn lint`. (This will run Prettier and ESLint.)
+
+### Push it
+
+1. `git add -A && git commit -m "Your message"` (replacing `Your message` with a commit message, such as `Fix Media processing error`) to stage and commit your changes
+2. `git push your-fork-name the-name-of-your-branch`
+3. Go to the [dolphjs/core repo](https://github.com/dolphjs/core) and you should see recently pushed branches.
+4. Follow GitHub's instructions.
+5. If possible, include screenshots of visual changes. A preview build is triggered after your changes are pushed to GitHub.
 
 ### Please note that this package is still in it's beta stage and a lot of features would be added in later versions will be released in the future. Stay tuned for updates and new features
 
