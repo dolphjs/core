@@ -17,6 +17,7 @@ To install the package, run:
 `npm install @dolphjs/core`
 
 or `npm install @dolphjs/cli -g` to make use of the CLI tool (recommended). [https://github.com/dolphjs/cli]
+and run with `dolph create-app 'app-name'`
 
 ## Usage
 
