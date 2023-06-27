@@ -33,6 +33,11 @@ declare class Dolph {
     server(): express.Express;
     /**
      *
+     * @param {cors.CorsOptions} corsOptions
+     */
+    enableCors(corsOptions: cors.CorsOptions): void;
+    /**
+     *
      * @param {Array<any>} middlewares
      * property adds middlewares to the `express application`
      */
@@ -47,6 +52,7 @@ import { Server } from "http";
 import { IncomingMessage } from "http";
 import { ServerResponse } from "http";
 import express = require("express");
+import cors = require("cors");
 import { pick } from "../utils/pick";
 import catchAsync = require("./catchAsync");
 import logger = require("../config/logger");
