@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 /* eslint-disable max-classes-per-file */
 // const io = require('socket.io');
-const cors = require('cors');
 // const { default: mongoose } = require('mongoose');
 const { catchAsync, Router, AppRes, httpStatus, mediaParser } = require('../../index');
 const Dolph = require('../../index');
@@ -70,11 +69,11 @@ const mongoConfig = {
   },
 };
 const routes = [new TestRoute()];
-const middlewares = [cors({ origin: '*', credentials: true })];
 // It is recommended to attach other services using prototyping
 //  in order not to crowd the constructor initiaizer
-const dolph = new Dolph(routes, '1313', 'development', { url: mongoConfig.url, options: mongoConfig.options }, middlewares);
+const dolph = new Dolph(routes, '1313', 'development', { url: mongoConfig.url, options: mongoConfig.options }, []);
 // const server = dolph.listen();
+dolph.enableCors({ origin: '*', credentials: true });
 dolph.listen();
 // mongoose
 //   .connect(mongoConfig.url, mongoConfig.options)

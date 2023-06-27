@@ -53,6 +53,7 @@
   "author": "Utibeabasi ekong <kamounation@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@types/cors": "^2.8.13",
     "benchmark": "^2.1.4",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
