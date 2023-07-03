@@ -6,6 +6,9 @@ DolphJs makes uses an appoach that set's up your nodejs applicaion environment t
 
 With dolphJs, code is minimized as many repetitive features are taken account of and put into the engine which is then exposed to the developer.
 
+# Sponsors
+![dolph](https://raw.githubusercontent.com/dolphjs/core/main/assets/questgig.jpeg)
+
 ## Prerequisites
 
 1.Git 2. Node: any 14.x version starting with v14.0.0 or greater 3. Package Manager [Yarn, Npm or Pnpm](recommended`yarn`)(<https://yarnpkg.com/lang/en/docs/install/>) 4. A fork of the repo (for any contributions)
