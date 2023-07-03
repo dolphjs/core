@@ -8,7 +8,7 @@ With dolphJs, code is minimized as many repetitive features are taken account of
 
 # Sponsors
 ![dolph](https://raw.githubusercontent.com/dolphjs/core/main/assets/questgig.jpeg)
-[https://questgig.com]
+
 
 ## Prerequisites
 
