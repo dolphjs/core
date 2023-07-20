@@ -2,9 +2,7 @@
 
 DolphJs is an express.js library for making software development easier. It takes care of the tiring services and functions developers need to go setup for every project.
 
-DolphJs makes uses an appoach that set's up your nodejs applicaion environment to the very best. It supports robust codebase system and the best error handling middlewares.
-
-With dolphJs, code is minimized as many repetitive features are taken account of and put into the engine which is then exposed to the developer.
+DolphJs makes use of an appoach that set's up your nodejs applicaion environment to the very best. It employs a robust and flexible codebase system fused together wit the best error handling middlewares and out of the box utilities like the `catchAsync`.
 
 # Sponsors
 ![dolph](https://raw.githubusercontent.com/dolphjs/core/main/assets/questgig.jpeg)
