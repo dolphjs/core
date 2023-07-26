@@ -6,13 +6,16 @@ declare class Dolph {
      * @param {Array<{path?: string; router:  import("express").Router}>} routes
      * @param {string|number} port
      * @param {string|number} env
-     * @param {{url:string, options:Object}} mongodbConfigz
+     * @param {{url:string, options:Object}} mongodbConfig
      * @param {Array<any>} externalMiddlewares
      */
     constructor(routes: Array<{
         path?: string;
         router: import("express").Router;
-    }>, port: string | number, env: string | number, mongodbConfig: any, externalMiddlewares: Array<any>);
+    }>, port: string | number, env: string | number, mongodbConfig: {
+        url: string;
+        options: any;
+    }, externalMiddlewares: Array<any>);
     app: import("express-serve-static-core").Express;
     env: string | number;
     port: string | number;
@@ -46,7 +49,7 @@ declare class Dolph {
     #private;
 }
 declare namespace Dolph {
-    export { pick, catchAsync, logger, Router, httpStatus, AppRes, Ip, mediaParser, mongoose };
+    export { pick, catchAsync, logger, Router, httpStatus, AppRes, mediaParser, mongoose };
 }
 import { Server } from "http";
 import { IncomingMessage } from "http";
@@ -59,7 +62,6 @@ import logger = require("../config/logger");
 declare const Router: typeof express.Router;
 import httpStatus = require("http-status");
 import AppRes = require("./appRes");
-import { Ip } from "./Ip";
 import mediaParser = require("./mediaParser");
 import { default as mongoose } from "mongoose";
 //# sourceMappingURL=Dolph.d.ts.map

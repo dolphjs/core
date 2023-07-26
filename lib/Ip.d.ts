@@ -1,10 +1,6 @@
 /// <reference types="node" />
-export const Ip: Ip;
-declare class Ip {
-    getAddress(): os.NetworkInterfaceInfoIPv4;
-    getIpAdress(): string;
-    getMacAddress(): string;
-}
+export function getAddress(): os.NetworkInterfaceInfoIPv4;
+export function getIpAdress(): string;
+export function getMacAddress(): string;
 import os = require("os");
-export {};
 //# sourceMappingURL=Ip.d.ts.map
