@@ -49,7 +49,7 @@ declare class Dolph {
     #private;
 }
 declare namespace Dolph {
-    export { pick, catchAsync, logger, Router, httpStatus, AppRes, mediaParser, mongoose };
+    export { pick, catchAsync, logger, Router, httpStatus, AppRes, getAddress, getMacAddress, getIpAdress, mediaParser, mongoose };
 }
 import { Server } from "http";
 import { IncomingMessage } from "http";
@@ -62,6 +62,9 @@ import logger = require("../config/logger");
 declare const Router: typeof express.Router;
 import httpStatus = require("http-status");
 import AppRes = require("./appRes");
+import { getAddress } from "./Ip";
+import { getMacAddress } from "./Ip";
+import { getIpAdress } from "./Ip";
 import mediaParser = require("./mediaParser");
 import { default as mongoose } from "mongoose";
 //# sourceMappingURL=Dolph.d.ts.map
