@@ -7,15 +7,12 @@ declare class Dolph {
      * @param {string|number} port
      * @param {string|number} env
      * @param {{url:string, options:Object}} mongodbConfig
-     * @param {Array<any>} externalMiddlewares
+     * @param {Array<import('express').RequestHandler>} externalMiddlewares
      */
     constructor(routes: Array<{
         path?: string;
         router: import("express").Router;
-    }>, port: string | number, env: string | number, mongodbConfig: {
-        url: string;
-        options: any;
-    }, externalMiddlewares: Array<any>);
+    }>, port: string | number, env: string | number, externalMiddlewares: Array<import('express').RequestHandler>);
     app: import("express-serve-static-core").Express;
     env: string | number;
     port: string | number;
@@ -28,6 +25,12 @@ declare class Dolph {
      * closes active mongoDB connection
      */
     closeMongoConnection(): void;
+    /**
+     *
+     * @param {string} url
+     * @param {mongoose.ConnectOptions} options
+     */
+    enableMongoose(url: string, options: mongoose.ConnectOptions): void;
     /**
      *
      * @returns {express.Express}
@@ -54,6 +57,7 @@ declare namespace Dolph {
 import { Server } from "http";
 import { IncomingMessage } from "http";
 import { ServerResponse } from "http";
+import { default as mongoose } from "mongoose";
 import express = require("express");
 import cors = require("cors");
 import { pick } from "../utils/pick";
@@ -66,5 +70,4 @@ import { getAddress } from "./Ip";
 import { getMacAddress } from "./Ip";
 import { getIpAdress } from "./Ip";
 import mediaParser = require("./mediaParser");
-import { default as mongoose } from "mongoose";
 //# sourceMappingURL=Dolph.d.ts.map
