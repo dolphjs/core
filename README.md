@@ -6,12 +6,12 @@ DolphJs is an express.js library for making software development easier. It take
 DolphJs makes use of an appoach that set's up your nodejs applicaion environment to the very best. It employs a robust and flexible codebase system fused together wit the best error handling middlewares and out of the box utilities like the `catchAsync`.
 
 # Sponsors
-![dolph](https://raw.githubusercontent.com/dolphjs/core/main/assets/questgig.jpeg)
 
+![dolph](https://raw.githubusercontent.com/dolphjs/core/main/assets/questgig.jpeg)
 
 ## Prerequisites
 
-1.Git 2. Node: any 14.x version starting with v14.0.0 or greater 3. Package Manager [Yarn, Npm or Pnpm](recommended`yarn`)(<https://yarnpkg.com/lang/en/docs/install/>) 4. A fork of the repo (for any contributions)
+1.Git 2. Node: any 16.x version starting with v16.0.0 or greater 3. Package Manager [Yarn, Npm or Pnpm](recommended`yarn`)(<https://yarnpkg.com/lang/en/docs/install/>) 4. A fork of the repo (for any contributions)
 
 ## Installation
 
